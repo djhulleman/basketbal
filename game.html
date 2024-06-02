@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basketball Drinking Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Basketball Drinking Game</h1>
+    <p>Press the button to draw three event cards for each player. Take a shot if all three events happen!</p>
+    
+    <div class="players-container" id="players-container"></div>
+
+    <script>
+        const eventsList = [
+            "Next offensive rebound",
+            "Crowd chants defense",
+            "Next dunk",
+            "Next three-pointer",
+            "Next foul",
+            "Next timeout",
+            "Next turnover",
+            "Next blocked shot",
+            "Next free throw made",
+            "Next assist",
+            "Next steal",
+            "Next coach's challenge"
+        ];
+
+        function drawEvents(playerId) {
+            let drawnEvents = [];
+            while (drawnEvents.length < 3) {
+                let event = eventsList[Math.floor(Math.random() * eventsList.length)];
+                if (!drawnEvents.includes(event)) {
+                    drawnEvents.push(event);
+                }
+            }
+            const eventsContainer = document.getElementById(`events-${playerId}`);
+            eventsContainer.innerHTML = drawnEvents.map(event => 
+                `<div class="event">
+                    <input type="checkbox" id="${event}-${playerId}">
+                    <label for="${event}-${playerId}">${event}</label>
+                </div>`).join('');
+            
+            // Update counter
+            const counter = document.getElementById(`counter-${playerId}`);
+            counter.innerText = `Draws: ${parseInt(counter.innerText.split(':')[1]) + 1}`;
+        }
+
+        function createPlayers(numPlayers) {
+            const playersContainer = document.getElementById('players-container');
+            for (let i = 1; i <= numPlayers; i++) {
+                const playerDiv = document.createElement('div');
+                playerDiv.classList.add('player');
+                playerDiv.innerHTML = `
+                    <h2>Player ${i}</h2>
+                    <button onclick="drawEvents('player${i}')">Draw Events for Player ${i}</button>
+                    <div>
+                        <span class="counter" id="counter-player${i}">Draws: 0</span>
+                        <button class="reset-button" onclick="resetCounter('player${i}')">Reset Counter</button>
+                    </div>
+                    <div id="events-player${i}" class="events"></div>`;
+                playersContainer.appendChild(playerDiv);
+            }
+        }
+
+        function resetCounter(playerId) {
+            const counter = document.getElementById(`counter-${playerId}`);
+            counter.innerText = 'Draws: 0';
+        }
+
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const numPlayers = parseInt(urlParams.get('players'));
+            if (isNaN(numPlayers) || numPlayers < 1 || numPlayers > 2) {
+                window.location.href = 'index.html';
+            } else {
+                createPlayers(numPlayers);
+            }
+        };
+    </script>
+</body>
+</html>

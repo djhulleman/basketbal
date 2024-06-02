@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basketball Drinking Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Welcome to the Basketball Drinking Game</h1>
+    <p>Please select the number of players:</p>
+    <div>
+        <button onclick="startGame(1)">1 Player</button>
+        <button onclick="startGame(2)">2 Players</button>
+    </div>
+
+    <script>
+        function startGame(numPlayers) {
+            window.location.href = `game.html?players=${numPlayers}`;
+        }
+    </script>
+</body>
+</html>
