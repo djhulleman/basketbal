@@ -45,7 +45,7 @@
             
             // Update counter
             const counter = document.getElementById(`counter-${playerId}`);
-            counter.innerText = `Draws: ${parseInt(counter.innerText.split(':')[1]) + 1}`;
+            counter.innerText = `Shots: ${parseInt(counter.innerText.split(':')[1]) + 1}`;
         }
 
         function createPlayers(numPlayers) {
@@ -57,7 +57,7 @@
                     <h2>Player ${i}</h2>
                     <button onclick="drawEvents('player${i}')">Draw Events for Player ${i}</button>
                     <div>
-                        <span class="counter" id="counter-player${i}">Draws: 0</span>
+                        <span class="counter" id="counter-player${i}">Shots: 0</span>
                         <button class="reset-button" onclick="resetCounter('player${i}')">Reset Counter</button>
                     </div>
                     <div id="events-player${i}" class="events"></div>`;
@@ -67,7 +67,7 @@
 
         function resetCounter(playerId) {
             const counter = document.getElementById(`counter-${playerId}`);
-            counter.innerText = 'Draws: 0';
+            counter.innerText = 'Shots: 0';
         }
 
         window.onload = function() {
