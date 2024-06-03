@@ -1,72 +1,61 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    margin: 50px;
-    background-color: #f9f9f9;
-    color: #333;
-}
-
-h1 {
-    font-size: 2.5em;
-    color: #222;
-}
-
-p {
-    font-size: 1.2em;
-    color: #555;
-}
-
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #0056b3;
+    background-image: url('images/court.jpg'); /* Replace 'path/to/your/background/image.jpg' with the actual path to your background image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat;
+    padding: 20px; /* Add padding to prevent content from touching the edges */
 }
 
 .players-container {
     display: flex;
-    justify-content: space-around;
+    flex-direction: row; /* Align players vertically */
+    align-items: center; /* Center align items horizontally */
+    justify-content: center; /* Center align items vertically */
     margin-top: 20px;
 }
 
 .player {
-    width: 45%;
-}
-
-h2 {
-    font-size: 2em;
-    color: #222;
+    border: 1px solid #ddd;
+    padding: 10px;
+    width: 350px;
+    margin: 25px;
+    background-color: rgba(255, 255, 255, 0.8); /* Add background color with opacity for better readability */
 }
 
 .events {
-    margin-top: 20px;
-}   
-
-.event {
-    margin: 20px;
-    font-size: 18px;
-    padding: 10px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
-    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px; /* Add margin to separate events from buttons */
 }
 
-.event input[type="checkbox"] {
-    margin-right: 10px;
+.event {
+    margin: 10px 3px; /* Adjusted margin */
+}
+
+.card-image {
+    width: 100px;
+    height: auto;
+    margin: 5px;
+    cursor: pointer;
 }
 
 .draw-button,
 .reset-button {
-    margin-bottom: 10px; /* Add margin between the buttons */
+    display: block;
+    margin-bottom: 10px;
+    margin-left: auto; /* Align buttons to the right */
+    margin-right: auto; /* Align buttons to the left */
+}
+
+.reset-button {
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+.counter {
+    display: block;
+    margin-top: 10px;
+    text-align: center;
 }

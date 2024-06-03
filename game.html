@@ -14,18 +14,18 @@
 
     <script>
         const eventsList = [
-            "Next offensive rebound",
-            "Crowd chants defense",
-            "Next dunk",
-            "Next three-pointer",
-            "Next foul",
-            "Next timeout",
-            "Next turnover",
-            "Next blocked shot",
-            "Next free throw made",
-            "Next assist",
-            "Next steal",
-            "Next coach's challenge"
+            { event: "Next offensive rebound", image: "images/offensive_rebound.png" },
+            { event: "Crowd chants defense", image: "images/defense_chant.png" },
+            { event: "Next dunk", image: "images/dunk.png" },
+            { event: "Next three-pointer", image: "images/three_pointer.png" },
+            { event: "Next foul", image: "images/foul.png" },
+            { event: "Next timeout", image: "images/timeout.png" },
+            { event: "Next turnover", image: "images/turnover.png" },
+            { event: "Next blocked shot", image: "images/blocked_shot.png" },
+            { event: "Next free throw made", image: "images/free_throw.png" },
+            { event: "Next assist", image: "images/assist.png" },
+            { event: "Next steal", image: "images/steal.png" },
+            { event: "Next coach's challenge", image: "images/coachs_challenge.png" }
         ];
 
         function drawEvents(playerId) {
@@ -39,8 +39,7 @@
             const eventsContainer = document.getElementById(`events-${playerId}`);
             eventsContainer.innerHTML = drawnEvents.map(event => 
                 `<div class="event">
-                    <input type="checkbox" id="${event}-${playerId}">
-                    <label for="${event}-${playerId}">${event}</label>
+                    <img src="${event.image}" alt="${event.event}" class="card-image" onclick="replaceImage(this)">
                 </div>`).join('');
             
             // Update counter
@@ -48,19 +47,23 @@
             counter.innerText = `Shots: ${parseInt(counter.innerText.split(':')[1]) + 1}`;
         }
 
+        function replaceImage(imageElement) {
+            imageElement.src = "images/check.png";
+        }
+
         function createPlayers(numPlayers) {
             const playersContainer = document.getElementById('players-container');
+            playersContainer.innerHTML = '';
             for (let i = 1; i <= numPlayers; i++) {
                 const playerDiv = document.createElement('div');
                 playerDiv.classList.add('player');
                 playerDiv.innerHTML = `
                     <h2>Player ${i}</h2>
-                    <button onclick="drawEvents('player${i}')">Draw Events for Player ${i}</button>
-                    <div>
-                        <span class="counter" id="counter-player${i}">Shots: 0</span>
-                        <button class="reset-button" onclick="resetCounter('player${i}')">Reset Counter</button>
-                    </div>
-                    <div id="events-player${i}" class="events"></div>`;
+                    <button onclick="drawEvents('player${i}')" class="draw-button">Draw Events for Player ${i}</button>
+                    <br>
+                    <button class="reset-button" onclick="resetCounter('player${i}')">Reset Counter</button>
+                    <div id="events-player${i}" class="events"></div>
+                    <span class="counter" id="counter-player${i}">Shots: 0</span>`;
                 playersContainer.appendChild(playerDiv);
             }
         }
